@@ -11,16 +11,34 @@ const $ = (id)=> {
 }
 // CHECK TO SEE IF STORAGE OBJECT EXISTS WHEN THE PAGE LOADS
 // IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
-let storage = localStorage.getItem('employees')
+// let storage = localStorage.getItem('employees')
+// if (storage.length !== 0) {
+//     localStorage.setItem('employees', employees.join('|'))
+// }
 
 // GET DOM ELEMENTS
 let form =  document.querySelector("form")
-let tbody = document.querySelector("tbody")
-let table = document.getElementById(empTable)
+let tbody 
+let table = document.querySelector('#empTable')
 
  
 // BUILD THE EMPLOYEES TABLE WHEN THE PAGE LOADS
-window.addEventListener('load', buildGrid)
+// window.addEventListener('load', buildGrid)
+
+window.addEventListener('load', () => {
+    tbody = document.querySelector("tbody")
+    for (let i of employees) {   
+        tbody.innerHTML += `<tr>
+                <td>${i[0]}</td>
+                <td>${i[1]}</td>
+                <td>${i[2]}</td>
+                <td>${i[3]}</td>
+                <td>${i[4]}</td>
+                <td></td>
+                </tr>`
+    }
+    table.appendChild(tbody)
+})
 
 
 
@@ -49,15 +67,24 @@ form.addEventListener('submit', (e) => {
     $('id').focus()
 
 });
+// CREATE DELETE BUTTON
+// let deleteBtn = document.createElement('button')
+// deleteBtn.className = 'btn btn-danger btn-sm float-right
+// let textDelete = document.createTextNode("X")
+// deleteBtn.appendChild(textDelete)
+
+
 
 // DELETE EMPLOYEE
-empTable.addEventListener('click', (e) => {
+table.addEventListener('click', (e) => {
     // CONFIRM THE DELETE
-
+    let response = confirm('Are you sure you want to delete this employee?')
         // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
-
+            if (response === 'yes') {
+                table.deleteRow(e.target.parentElement.parentElement.rowIndex);
+            }
         // REMOVE EMPLOYEE FROM ARRAY
-
+            
         // BUILD THE GRID
 
 });
@@ -65,14 +92,12 @@ empTable.addEventListener('click', (e) => {
 // BUILD THE EMPLOYEES GRID
 function buildGrid() {    
     // REMOVE THE EXISTING SET OF ROWS BY REMOVING THE ENTIRE TBODY SECTION
-    let oldRow = document.getElementById(tbody)
-    function deleteRow() {
-        oldRow.parentNode.removeChild(oldRow)
-    }
-
-  
+    const t = document.querySelector('#empTable tbody')
+    t.parentNode.removeChild(t)
+   
+    
     // REBUILD THE TBODY FROM SCRATCH
-    newTbody = document.createElement("tbody")
+    const tbody = document.createElement('tbody')
     // LOOP THROUGH THE ARRAY OF EMPLOYEES
     for (let i of employees) {   
     // REBUILDING THE ROW STRUCTURE
@@ -82,11 +107,14 @@ function buildGrid() {
                             <td>${i[2]}</td>
                             <td>${i[3]}</td>
                             <td>${i[4]}</td>
+                            <td></td>
                             </tr>`
     }   
         
     // BIND THE TBODY TO THE EMPLOYEE TABLE
-    tbody.appendChild(newTbody)
+   table.appendChild(tbody)
+    
+
     // UPDATE EMPLOYEE COUNT
    
     // STORE THE ARRAY IN STORAGE
@@ -95,3 +123,7 @@ function buildGrid() {
 };
 
 
+// let deleteBtn = document.createElement('button')
+    // deleteBtn.className = 'btn btn-danger btn-sm float-right'
+    // let textDelete = document.createTextNode("X")
+    // deleteBtn.appendChild(textDelete)

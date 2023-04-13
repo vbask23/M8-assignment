@@ -133,51 +133,23 @@
 // console.log(movies.shift())
 
 //STEP 12
-let movies = []
-movies[0] = "The Last Mojican"
-movies[1] = "Sahara"
-movies[2] = "Shangri-la"
-movies[3] = "The Ten Commandments"
-movies[4] = "Nibiru"
-movies[5] = "Grounding"
-movies[6] = "Me, Myself and I"
-movies[7] = leastFavMovies = []
-    leastFavMovies[0] = "Saturday Night Fever"
-    leastFavMovies[1] = "A Day In The LIfe Of A Fool"
-    leastFavMovies[2] = "The Agony and the Ecstasy"
-movies[7] = (leastFavMovies[leastFavMovies.indexOf("Saturday Night Fever")] = "War of the Gods")
-movies[8] = (leastFavMovies[leastFavMovies.indexOf("A Day In The LIfe Of A Fool")] = "Alien Invasion")
-movies[9] = (leastFavMovies[leastFavMovies.indexOf("The Agony and the Ecstasy")] = "Sunshine")
-console.log(movies)
-let moviesILike = movies.map((value) => {
-    if(value == leastFavMovies) {
-        leastFavMovies.forEach((leastFavMovie) => {
-            console.log(leastFavMovie[leastFavMovies.indexOf(leastFavMovie)] = "Maria")
-            console.log(leastFavMovie[leastFavMovies.indexOf(leastFavMovie)] = "Jose")
-            console.log(leastFavMovie[leastFavMovies.indexOf(leastFavMovie)] = "Pedro")
+// let movies = []
+// movies[0] = "The Last Mojican"
+// movies[1] = "Sahara"
+// movies[2] = "Shangri-la"
+// movies[3] = "The Ten Commandments"
+// movies[4] = "Nibiru"
+// movies[5] = "Grounding"
+// movies[6] = "Me, Myself and I"
+// movies[7] = leastFavMovies = []
+//     leastFavMovies[0] = "Saturday Night Fever"
+//     leastFavMovies[1] = "A Day In The LIfe Of A Fool"
+//     leastFavMovies[2] = "The Agony and the Ecstasy"
+// movies[7] = (leastFavMovies[leastFavMovies.indexOf("Saturday Night Fever")] = "War of the Gods")
+// movies[8] = (leastFavMovies[leastFavMovies.indexOf("A Day In The LIfe Of A Fool")] = "Alien Invasion")
+// movies[9] = (leastFavMovies[leastFavMovies.indexOf("The Agony and the Ecstasy")] = "Sunshine")
+// console.log(movies)
 
-        })}})
-     
-//         for(let i of leastFavMovies) {
-//             leastFavMovies.splice([leastFavMovies[i]], [leastFavMovies[-1]])
-//     }}})
-//     leastFavMovies
-// console.log(moviesILike)
-        // leastFavMovies.forEach((leastFavMovie) => {
-        //     let movieILike = leastFavMovie
-
-        // leastFavMovies.forEach((leastFavMovie) => {
-        //     // leastFavMovie[leastFavMovies.indexOf(leastFavMovie)] 
-        //     console.log(leastFavMovies.indexOf(leastFavMovie))
-            
-
-
-        // }) 
-    
-        
-        // console.log(value)
-    // }
-// })
 
 //STEP 13
 // let movies = [["Sahara", 1], ["Shangri-la", 2], ["Nibiru", 3], ["The Ten Commandments", 4], ["The Last Mojican", 5]]
