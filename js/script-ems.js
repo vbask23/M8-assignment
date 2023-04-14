@@ -6,15 +6,15 @@ let employees = [
     [ 4587966, "Maria Morales",6835, "mmorales@v.net", "Quality Assurance"],
     [ 4589967, "Teodora Alonzo",1354, "talonzo@v.net", "Marketing"]
 ]
+
+// CHECK TO SEE IF STORAGE OBJECT EXISTS WHEN THE PAGE LOADS
+// IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
+
+localStorage.setItem('employees', JSON.stringify(employees))
+// employees = localStorage.employees 
 const $ = (id)=> {
     return document.getElementById(id)
 }
-// CHECK TO SEE IF STORAGE OBJECT EXISTS WHEN THE PAGE LOADS
-// IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
-// let storage = localStorage.getItem('employees')
-// if (storage.length !== 0) {
-//     localStorage.setItem('employees', employees.join('|'))
-// }
 
 // GET DOM ELEMENTS
 let form =  document.querySelector("form")
@@ -27,21 +27,16 @@ let table = document.querySelector('#empTable')
 
 window.addEventListener('load', () => {
     tbody = document.querySelector("tbody")
-    for (let i of employees) {   
-        tbody.innerHTML += `<tr>
-                <td>${i[0]}</td>
-                <td>${i[1]}</td>
-                <td>${i[2]}</td>
-                <td>${i[3]}</td>
-                <td>${i[4]}</td>
-                <td></td>
-                </tr>`
-    }
+    let tr 
+        for (let i of employees) {
+            tr = document.createElement('tr')  
+            for (let j of i) {
+                    tr.innerHTML += `<td>${j}</td> `                      
+            }
+            tbody.appendChild(tr)
+        }
     table.appendChild(tbody)
 })
-
-
-
 // ADD EMPLOYEE
 form.addEventListener('submit', (e) => {
     // PREVENT FORM SUBMISSION
@@ -67,26 +62,26 @@ form.addEventListener('submit', (e) => {
     $('id').focus()
 
 });
-// CREATE DELETE BUTTON
-// let deleteBtn = document.createElement('button')
-// deleteBtn.className = 'btn btn-danger btn-sm float-right
-// let textDelete = document.createTextNode("X")
-// deleteBtn.appendChild(textDelete)
+
 
 
 
 // DELETE EMPLOYEE
 table.addEventListener('click', (e) => {
     // CONFIRM THE DELETE
-    let response = confirm('Are you sure you want to delete this employee?')
+    if(confirm('Are you sure you want to delete this employee?')) {
         // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
-            if (response === 'yes') {
-                table.deleteRow(e.target.parentElement.parentElement.rowIndex);
-            }
+        // let z = (e.target.parentElement.parentElement.rowIndex);
+        table.deleteRow(e.target.parentElement.parentElement.rowIndex);
         // REMOVE EMPLOYEE FROM ARRAY
-            
-        // BUILD THE GRID
+        // table.deleteRow(z)
+        // employees[z].clear()
 
+
+           
+        // BUILD THE GRID
+        buildGrid
+    }
 });
 
 // BUILD THE EMPLOYEES GRID
@@ -97,29 +92,33 @@ function buildGrid() {
    
     
     // REBUILD THE TBODY FROM SCRATCH
-    const tbody = document.createElement('tbody')
+    let tbody = document.createElement('tbody')
     // LOOP THROUGH THE ARRAY OF EMPLOYEES
-    for (let i of employees) {   
-    // REBUILDING THE ROW STRUCTURE
-         tbody.innerHTML += `<tr>
-                            <td>${i[0]}</td>
-                            <td>${i[1]}</td>
-                            <td>${i[2]}</td>
-                            <td>${i[3]}</td>
-                            <td>${i[4]}</td>
-                            <td></td>
-                            </tr>`
-    }   
-        
+    for (let i of employees) {  
+        tr = document.createElement('tr')
+    // REBUILDING THE ROW STRUCTURE                      
+            for (let j of i) {   
+                console.log(tr.innerHTML += `<td>${j}</td> `)                      
+            }
+            tbody.appendChild(tr)
+    }
     // BIND THE TBODY TO THE EMPLOYEE TABLE
    table.appendChild(tbody)
     
 
     // UPDATE EMPLOYEE COUNT
-   
-    // STORE THE ARRAY IN STORAGE
-    localStorage.setItem('employees', JSON.stringify(employees))  
+    
+    let x = document.getElementsByTagName('h2')
+    let countEmp = x[1]
+    let counting =document.querySelector('#empCount').textContent
+    counting = 0
+    counting = employees.length 
+    let counterNum = document.createTextNode(counting)
+    countEmp.appendChild(counterNum)
+    counterNum.textcontent =`${counting}`
 
+    // STORE THE ARRAY IN STORAGE
+    localStorage.setItem('employees', JSON.stringify(employees));  
 };
 
 
