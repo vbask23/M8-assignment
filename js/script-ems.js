@@ -56,19 +56,34 @@ form.addEventListener('submit', (e) => {
     $('id').focus()
 
 });
-
+function getRowIndex(e){
+    e= window.event || e;
+    var  sib, who= e.target || e.srcElement;
+    while(who && who.nodeName!= 'TR') who= who.parentNode;
+    if(who){
+        let r = who.sectionRowIndex+1
+        if(e.stopPropagation) e.stopPropagation();
+        else e.cancelBubble= true;
+        console.log(r)
+        table.deleteRow(r)
+        // employees.splice(r,r+1)
+        return r
+    }
+}
+   
 // DELETE EMPLOYEE
 table.addEventListener('click', (e) => {
     // CONFIRM THE DELETE
     if(confirm('Are you sure you want to delete this employee?')) {
         // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
-        let z = (e.target.parentNode.parentNode.rowIndex)
-        table.deleteRow(z)
+        // table.deleteRow(r)
+        getRowIndex(e)
+   
         // REMOVE EMPLOYEE FROM ARRAY
-                  
-      // BUILD THE GRID
+        employees.splice(`${r},${r+1}`)             
+        // BUILD THE GRID
         buildGrid()
-} 
+    } 
 });
 
 // BUILD THE EMPLOYEES GRID
@@ -105,23 +120,5 @@ function buildGrid() {
     // STORE THE ARRAY IN STORAGE
     localStorage.setItem('employees', JSON.stringify(employees));  
 };
-
-// let rows = document.getElementsByTagName('tr')
-// var trs = document.getElementsByTagName('tr');
-
-// var rows = document.getElementsByTagName('tr');
-// for (var row in rows) {
-//   row.addEventListener('click', handleEvent); 
-//   // or attachEvent, depends on browser
-// }  // if(confirm('Are you sure you want to delete this employee?')) {
-    //     table.deleteRow(e.target.parentNode.parentNode.rowIndex)
-    //     for (let row in rows) {
-    //         row.addEventListener('click',(e)=> {
-    //             table.deleteRow(e.target.parentNode.parentNode.rowIndex)
-    //         })
-    // }
-        
-    // tbody.deleteRow(e.target.parentElement.parentElement.rowIndex);
-        // // tbody.deleteRow(e.target.parentElement.parentElement.rowIndex);
 
 
