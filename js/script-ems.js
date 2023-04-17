@@ -74,6 +74,7 @@ function getRowIndex(e){
         console.log(index)
         employees.splice(index, 1)
         console.log(employees)
+        buildGrid()
     }   
 }
    
@@ -90,7 +91,7 @@ table.addEventListener('click', (e) => {
         // BUILD THE GRID
         // buildGrid()
     } 
-    buildGrid()
+    // buildGrid()
 });
 
 // BUILD THE EMPLOYEES GRID
