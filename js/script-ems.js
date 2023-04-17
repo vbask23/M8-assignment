@@ -118,5 +118,3 @@ function buildGrid() {
 };
 
 
-let empCount    = document.querySelector('#empCount')
-empCount.value = `(${employees.length})`
