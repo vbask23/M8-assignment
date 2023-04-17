@@ -54,8 +54,8 @@ form.addEventListener('submit', (e) => {
 
     // SET FOCUS BACK TO THE ID TEXT BOX
     $('id').focus()
-
 });
+
 function getRowIndex(e){
     e= window.event || e;
     var  sib, who= e.target || e.srcElement;
@@ -65,10 +65,16 @@ function getRowIndex(e){
         if(e.stopPropagation) e.stopPropagation();
         else e.cancelBubble= true;
         console.log(r)
+        let x = employees[r-1]
+        console.log(x)
         table.deleteRow(r)
-        // employees.splice(r,r+1)
-        return r
-    }
+        let index = employees.findIndex((value, index,array) => {
+            return value === x
+        })
+        console.log(index)
+        employees.splice(index, 1)
+        console.log(employees)
+    }   
 }
    
 // DELETE EMPLOYEE
@@ -76,14 +82,15 @@ table.addEventListener('click', (e) => {
     // CONFIRM THE DELETE
     if(confirm('Are you sure you want to delete this employee?')) {
         // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
-        // table.deleteRow(r)
         getRowIndex(e)
    
         // REMOVE EMPLOYEE FROM ARRAY
-        employees.splice(`${r},${r+1}`)             
+        
+        console.log(employees.splice(index, index+1)            )
         // BUILD THE GRID
-        buildGrid()
+        // buildGrid()
     } 
+    buildGrid()
 });
 
 // BUILD THE EMPLOYEES GRID
@@ -118,7 +125,6 @@ function buildGrid() {
     counterNum.textcontent =`${counting}`
 
     // STORE THE ARRAY IN STORAGE
-    localStorage.setItem('employees', JSON.stringify(employees));  
+    localStorage.setItem('employees', JSON.stringify(employees)); 
+    localStorage.employees 
 };
-
-
