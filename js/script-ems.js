@@ -58,20 +58,17 @@ form.addEventListener('submit', (e) => {
 
 function getRowIndex(e){
     e= window.event || e;
-    var  sib, who= e.target || e.srcElement;
+    var who= e.target || e.srcElement;
     while(who && who.nodeName!= 'TR') who= who.parentNode;
     if(who){
         let r = who.sectionRowIndex+1
         if(e.stopPropagation) e.stopPropagation();
         else e.cancelBubble= true;
-        console.log(r)
         let x = employees[r-1]
-        console.log(x)
         table.deleteRow(r)
         let index = employees.findIndex((value, index,array) => {
             return value === x
         })
-        console.log(index)
         employees.splice(index, 1)
         console.log(employees)
         buildGrid()
@@ -86,12 +83,8 @@ table.addEventListener('click', (e) => {
         getRowIndex(e)
    
         // REMOVE EMPLOYEE FROM ARRAY
-        
-        console.log(employees.splice(index, index+1)            )
-        // BUILD THE GRID
-        // buildGrid()
+        console.log(employees.splice(index, index+1))        
     } 
-    // buildGrid()
 });
 
 // BUILD THE EMPLOYEES GRID
@@ -116,16 +109,14 @@ function buildGrid() {
     table.appendChild(tbody)
     
     // UPDATE EMPLOYEE COUNT  
-    let x = document.getElementsByTagName('h2')
-    let countEmp = x[1]
-    let counting =document.querySelector('#empCount')//.textContent
-    counting = 0
-    counting = employees.length
-    let counterNum = document.createTextNode(counting)
-    countEmp.appendChild(counterNum)
-    counterNum.textcontent =`${counting}`
+    let empCount    = document.querySelector('#empCount')
+    empCount.value = `(${employees.length})`
 
     // STORE THE ARRAY IN STORAGE
     localStorage.setItem('employees', JSON.stringify(employees)); 
     localStorage.employees 
 };
+
+
+let empCount    = document.querySelector('#empCount')
+empCount.value = `(${employees.length})`
