@@ -101,8 +101,9 @@ function buildGrid() {
         tr = document.createElement('tr')
     // REBUILDING THE ROW STRUCTURE                      
             for (let j of i) {   
-                tr.innerHTML += `<td>${j}</td> `                      
+                tr.innerHTML += `<td>${j}</td> `                        
             }
+            tr.innerHTML += `<td><button class="btn btn-sm btn-danger delete">X</button></td>`
             tbody.appendChild(tr)
     }
     // BIND THE TBODY TO THE EMPLOYEE TABLE
